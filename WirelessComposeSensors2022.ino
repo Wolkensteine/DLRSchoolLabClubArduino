@@ -1,5 +1,5 @@
 // Imports
-#include <TinyXML.h>
+//#include <TinyXML.h>
 #include <SD.h>
 
 // Variables
@@ -109,24 +109,38 @@ void loop(){
   }
 
   if (Counterx == 1) {
-    highX = allx / 10;
-    normalY = ally / 10;
-    normalZ = allz / 10;
-    Serial.println("New high x is: " + highX);
+    highX = int(allx / 10);
+    normalY = int(ally / 10);
+    normalZ = int(allz / 10);
+    Serial.println("New high x is: " + String(highX));
+    //Serial.println("New normal y is: " + String(normalY));
+    //Serial.println("New normal z is: " + String(normalZ));
+    Counterx --;
+    allx = 0;
+    ally = 0;
+    allz = 0;
   }
  
   if (Countery == 1) {
-    normalX = allx / 10;
-    highY = ally / 10;
-    normalZ = allz / 10;
-    Serial.println("New high y is: " + highY);
+    normalX = int(allx / 10);
+    highY = int(ally / 10);
+    normalZ = int(allz / 10);
+    Serial.println("New high y is: " + String(highY));
+    Countery --;
+    allx = 0;
+    ally = 0;
+    allz = 0;
   }
  
   if (Counterz == 1) {
-    normalX = allx / 10;
-    normalY = ally / 10;
-    highZ = allz / 10;
-    Serial.println("New high z is: " + highZ);
+    normalX = int(allx / 10);
+    normalY = int(ally / 10);
+    highZ = int(allz / 10);
+    Serial.println("New high z is: " + String(highZ));
+    Counterz --;
+    allx = 0;
+    ally = 0;
+    allz = 0;
   }
 
   // delay because we don't want to many values
