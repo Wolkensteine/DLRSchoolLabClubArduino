@@ -68,7 +68,7 @@ void loop(){
   
   // print to file
   if(myFile) {
-    myFile.print(String(acc_x) + "\t" + String(acc_y) + "\t" + String(acc_z) + "\t" String(x) + "\t" + String(y) + "\t" + String(z) + "\t \n");
+    myFile.print(String(acc_x) + "\t" + String(acc_y) + "\t" + String(acc_z) + "\t" + String(x) + "\t" + String(y) + "\t" + String(z) + "\t \n");
     myFile.close();
   } else {
     Serial.print("File nicht geöffnet");
