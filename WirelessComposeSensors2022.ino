@@ -1,5 +1,4 @@
 // Imports
-//#include <TinyXML.h>
 #include <SD.h>
 
 // Variables
@@ -7,6 +6,10 @@ File myFile;
 #define port_x A0
 #define port_y A1
 #define port_z A2
+#define port_conductance A3
+
+int conductance;
+int conductance_avr;
 
 char UserInput;
 String UserInputString;
@@ -21,7 +24,7 @@ int Counterx;
 int allx;
 int Countery;
 int ally;
-int Counterz;
+int Counterz = 11; // Value is set to 11 to automagically calibrate on startup
 int allz;
 
 
@@ -44,6 +47,13 @@ void loop(){
   // open File on sd
   myFile = SD.open("data.txt", FILE_WRITE);
 
+  conductance_avr = 0;
+  for (int i=0;i<10;i++) {
+    conductance = analogRead(port_conductance);
+    conductance_avr += conductance;
+  }
+  conductance_avr = conductance_avr/10;
+
   // Get data
   long x = analogRead(port_x);
   long y = analogRead(port_y);
@@ -53,7 +63,7 @@ void loop(){
   long acc_y = map(y,highY,normalY,1000,0);
   long acc_z = map(z,highZ,normalZ,1000,0);
   
-  Serial.println("X: " + String(acc_x) + " Y: " + String(acc_y) + " Z: " + String(acc_z));
+  Serial.println("X: " + String(acc_x) + " Y: " + String(acc_y) + " Z: " + String(acc_z) + " conductance: " + conductance_avr);
   
  
   // Get user inputs
@@ -68,7 +78,7 @@ void loop(){
   
   // print to file
   if(myFile) {
-    myFile.print(String(acc_x) + "\t" + String(acc_y) + "\t" + String(acc_z) + "\t" + String(x) + "\t" + String(y) + "\t" + String(z) + "\t \n");
+    myFile.print(String(acc_x) + "\t" + String(acc_y) + "\t" + String(acc_z) + "\t" + String(x) + "\t" + String(y) + "\t" + String(z) + "\t" + conductance_avr + "\t \n");
     myFile.close();
   } else {
     Serial.print("File nicht geöffnet");
