@@ -150,7 +150,7 @@ void loop(){
     Serial.println("New normal x is: " + String(normalX));
     Serial.println("New normal y is: " + String(normalY));
     Counterz --;
-    normalZ = (normalX + normalY)/ 2;
+    normalZ = int((normalX + normalY)/ 2);
     highX = normalX + (highZ - normalZ);
     highY = normalY + (highZ - normalZ);
     allx = 0;
@@ -159,6 +159,10 @@ void loop(){
   }
 
   // delay because we don't want to many values
-  delay(100);
+  if (acc_z > 500){
+    delay(100);
+  } else {
+    delay(50);
+  }
   
 }
