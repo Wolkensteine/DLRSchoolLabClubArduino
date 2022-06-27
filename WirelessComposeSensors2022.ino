@@ -123,8 +123,8 @@ void loop(){
     normalY = int(ally / 10);
     normalZ = int(allz / 10);
     Serial.println("New high x is: " + String(highX));
-    //Serial.println("New normal y is: " + String(normalY));
-    //Serial.println("New normal z is: " + String(normalZ));
+    Serial.println("New normal y is: " + String(normalY));
+    Serial.println("New normal z is: " + String(normalZ));
     Counterx --;
     allx = 0;
     ally = 0;
@@ -147,7 +147,12 @@ void loop(){
     normalY = int(ally / 10);
     highZ = int(allz / 10);
     Serial.println("New high z is: " + String(highZ));
+    Serial.println("New normal x is: " + String(normalX));
+    Serial.println("New normal y is: " + String(normalY));
     Counterz --;
+    normalZ = (normalX + normalY)/ 2;
+    highX = normalX + (highZ - normalZ);
+    highY = normalY + (highZ - normalZ);
     allx = 0;
     ally = 0;
     allz = 0;
